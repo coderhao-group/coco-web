@@ -51,7 +51,7 @@ $ npm run dev
 ```
 会自动创建 `project`、`template` 数据表。正常启动后，可以看到我们的服务启动 `http://localhost:70001`。
 
-## 发布模板
+## 发布模板 templete 81
 然后我们需要创建一个模板，用于可视化编辑器选用。找到我们的 `coco-template` 模板，这里我已经创建好了一个简单模板。我们要做的就是发布他：
 ```shell
 $ cd coco-template && npm i
@@ -70,7 +70,7 @@ $ npm run serve
 
 **PS: 这里是我自己的演示，我可以发布提交到我自己的 github，你们可以 fork 出来跑这个命令**
 
-## 运行可视化编辑器
+## 运行可视化编辑器web 80
 最后我们需要对模板页面进行编辑，这里我们需要跑起来 `coco-web` 项目。
 ```shell
 $ cd coco-web && npm i
@@ -98,7 +98,6 @@ $ npm run serve
 // coco-server/app/service/project.js
 const octokit = new Octokit({ auth: 'youapitoken' });
 ```
-
 
 
 

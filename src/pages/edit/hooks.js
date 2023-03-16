@@ -1,10 +1,10 @@
-import {reactive, nextTick} from 'vue';
+import { reactive, nextTick } from 'vue';
 
-function getElementTop(element){
+function getElementTop(element) {
   let actualTop = element.offsetTop;
   let current = element.offsetParent;
 
-  while (current !== null){
+  while (current !== null) {
     actualTop += current.offsetTop;
     current = current.offsetParent;
   }
@@ -38,55 +38,60 @@ export function useEditor() {
     });
   }
 
+  // eslint-disable-next-line no-unused-vars
   const eventInit = (selectCb) => {
     const componentsPND = document.getElementById('frame').contentWindow.document.getElementById('slider-view');
+    console.log('componentsPND: ', componentsPND);
 
-    componentsPND.addEventListener('click', (e) => {
-      let node = e.target;
-      while(node.tagName !== 'HTML') {
-        let currentId = node?.getAttribute('id') || '';
-        if (currentId.indexOf('coco-render-id-_component_') >= 0) {
-          const top = getElementTop(node);
-          const { height } = getComputedStyle(node);
-          restStyle(height, top, 'activeStyle');
-          const pids = Array.from(componentsPND.childNodes).map(nd => nd.getAttribute('id'))
-          pids.forEach((id, index) => {
-            if (id === currentId) {
-              state.isTop = index === 0;
-              state.isBottom = index === pids.length - 1;
-              state.current = index;
-              selectCb(index);
-            }
-          });
-        }
-        node = node.parentNode;
-      }
-    });
-    componentsPND.addEventListener('mouseover', (e) => {
-      let node = e.target;
-      while(node.tagName !== 'HTML') {
-        let currentId = node?.getAttribute('id') || '';
-        if (currentId.indexOf('coco-render-id-_component_') >= 0) {
-          try {
+    if (componentsPND) {
+      // TODO: 下面注释打开有个addEventListener报错,因为直接有可能为null
+      componentsPND.addEventListener('click', (e) => {
+        let node = e.target;
+        while (node.tagName !== 'HTML') {
+          let currentId = node?.getAttribute('id') || '';
+          if (currentId.indexOf('coco-render-id-_component_') >= 0) {
             const top = getElementTop(node);
             const { height } = getComputedStyle(node);
-            restStyle(height, top, 'hoverStyle');
+            restStyle(height, top, 'activeStyle');
             const pids = Array.from(componentsPND.childNodes).map(nd => nd.getAttribute('id'))
             pids.forEach((id, index) => {
               if (id === currentId) {
                 state.isTop = index === 0;
                 state.isBottom = index === pids.length - 1;
                 state.current = index;
+                selectCb(index);
               }
-            })
-          } catch (e) {
-            // ignore
+            });
           }
-
+          node = node.parentNode;
         }
-        node = node.parentNode;
-      }
-    });
+      });
+      componentsPND.addEventListener('mouseover', (e) => {
+        let node = e.target;
+        while (node.tagName !== 'HTML') {
+          let currentId = node?.getAttribute('id') || '';
+          if (currentId.indexOf('coco-render-id-_component_') >= 0) {
+            try {
+              const top = getElementTop(node);
+              const { height } = getComputedStyle(node);
+              restStyle(height, top, 'hoverStyle');
+              const pids = Array.from(componentsPND.childNodes).map(nd => nd.getAttribute('id'))
+              pids.forEach((id, index) => {
+                if (id === currentId) {
+                  state.isTop = index === 0;
+                  state.isBottom = index === pids.length - 1;
+                  state.current = index;
+                }
+              })
+            } catch (e) {
+              // ignore
+            }
+
+          }
+          node = node.parentNode;
+        }
+      });
+    }
   }
 
   const init = (index) => {
@@ -140,7 +145,7 @@ export function useEditor() {
       if (nd.getAttribute('data-layout') === 'fixed') {
         try {
           const el = nd.childNodes[0];
-          const {left, top, width, height} = getComputedStyle(el);
+          const { left, top, width, height } = getComputedStyle(el);
           state.dragableComponents.push({
             x: parseInt(left),
             y: parseInt(top),

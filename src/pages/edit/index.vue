@@ -139,6 +139,7 @@ import {
   ArrowDownOutlined,
   LinkOutlined,
 } from '@ant-design/icons-vue';
+// eslint-disable-next-line no-unused-vars
 import {toRefs, reactive, watch, toRaw} from 'vue';
 import {useStore} from 'vuex';
 import {useRoute} from 'vue-router';
@@ -161,6 +162,7 @@ export default {
       visible: true,
       spinning: true
     });
+  // eslint-disable-next-line no-unused-vars
     const {editorState, eventInit, init, getIndex, setFixedStyle} = useEditor();
     const router = useRoute();
 
@@ -171,8 +173,13 @@ export default {
       state.data = result[0];
       const targetConfig = result[0].pageConfig;
       state.name = result[0].name;
-      state.url = `http://admin.coco-h5.cn/api/static/index.html?isEdit=true`;
-      state.showUrl = `https://admin.coco-h5.cn/api/static/index.html`;
+      // state.url = `http://admin.coco-h5.cn/api/static/index.html?isEdit=true`;
+      // state.url = `http://huodong.goodcoder.tech/8081?isEdit=true`;
+      // state.url = `http://aaa.huodong.goodcoder.tech/8081?isEdit=true`;
+      state.url = `http://huodong.goodcoder.tech?isEdit=true`;
+      // state.showUrl = `https://admin.coco-h5.cn/api/static/index.html`;
+      // state.showUrl = `http://aaa.huodong.goodcoder.tech:8081`;
+      state.showUrl = `http://huodong.goodcoder.tech:8081`;
       dispatch('returnConfig', {
         targetConfig: targetConfig,
         pageData: state.data,

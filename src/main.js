@@ -6,6 +6,7 @@ import router from './router';
 import store from './store'
 // TODO: 本地先注释
 // document.domain = "coco-h5.cn" // 设置同域
+document.domain = "huodong.goodcoder.tech" // 设置同域
 
 import {
   FileImageOutlined,

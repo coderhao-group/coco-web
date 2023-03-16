@@ -57,7 +57,9 @@ import {reactive, toRefs} from 'vue';
 import { useForm } from '@ant-design-vue/use';
 import {market} from '@/api';
 import {useRouter} from 'vue-router';
+// eslint-disable-next-line no-unused-vars
 import { message } from 'ant-design-vue';
+// eslint-disable-next-line no-unused-vars
 import {project} from '@/api';
 
 export default {
@@ -72,7 +74,8 @@ export default {
     const pageState = reactive({
       projectName: '',
       gitName: '',
-      host: ' https://coco-h5.github.io/'
+      // host: ' https://coco-h5.github.io/'
+      host: ' https://coderhao-group.github.io/'
     });
 
     const rulesRef = reactive({
@@ -98,6 +101,7 @@ export default {
       state.pageInfo = config;
       state.createDialog = true;
     }
+    // eslint-disable-next-line no-unused-vars
     const router = useRouter();
     // TODO 下面代码注释？
     const createPage = async () => {
@@ -126,41 +130,40 @@ export default {
         } catch (e) {
           state.creating = false;
         }
-    // TODO
-      validate().then(async () => {
-        message.info('由于权限管控暂未完成，暂不支持新增页面，请前往工作台体验先有页面！');
-        setTimeout(() => {
-            router.push({
-              path: '/dashboard',
-            })
-        }, 2000);
-        // state.creating = true;
-        // try {
-        //   const data = await project.createProject({
-        //     pageConfig: {
-        //       config: {
-        //         templateId: state.pageInfo.id,
-        //         templateGit: state.pageInfo.gitUrl,
-        //         templateName: state.pageInfo.name,
-        //         projectName: pageState.projectName || '未命名的页面',
-        //         gitName: pageState.gitName,
-        //         templateVersion: state.pageInfo.version,
-        //       },
-        //       userSelectComponents: [],
-        //       components: [],
-        //     }
-        //   });
-        //   state.creating = false;
-        //   router.push({
-        //     path: '/edit',
-        //     query: {
-        //       id: data.result.id,
-        //     }
-        //   })
-        // } catch (e) {
-        //   state.creating = false;
-        // }
-      })
+      // validate().then(async () => {
+      //   message.info('由于权限管控暂未完成，暂不支持新增页面，请前往工作台体验先有页面！');
+      //   setTimeout(() => {
+      //       router.push({
+      //         path: '/dashboard',
+      //       })
+      //   }, 2000);
+      //   // state.creating = true;
+      //   // try {
+      //   //   const data = await project.createProject({
+      //   //     pageConfig: {
+      //   //       config: {
+      //   //         templateId: state.pageInfo.id,
+      //   //         templateGit: state.pageInfo.gitUrl,
+      //   //         templateName: state.pageInfo.name,
+      //   //         projectName: pageState.projectName || '未命名的页面',
+      //   //         gitName: pageState.gitName,
+      //   //         templateVersion: state.pageInfo.version,
+      //   //       },
+      //   //       userSelectComponents: [],
+      //   //       components: [],
+      //   //     }
+      //   //   });
+      //   //   state.creating = false;
+      //   //   router.push({
+      //   //     path: '/edit',
+      //   //     query: {
+      //   //       id: data.result.id,
+      //   //     }
+      //   //   })
+      //   // } catch (e) {
+      //   //   state.creating = false;
+      //   // }
+      // })
         
     }
     const { resetFields, validate, validateInfos } = useForm(pageState, rulesRef);
